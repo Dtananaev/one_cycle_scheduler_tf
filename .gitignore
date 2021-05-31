@@ -1,0 +1,5 @@
+*.pyc
+*~
+*.tar.gz
+*.tar
+one_cycle_tf.egg-info

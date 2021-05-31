@@ -43,3 +43,4 @@ setuptools.setup(
           'matplotlib',
       ],
     python_requires='>=3.6',
+)
