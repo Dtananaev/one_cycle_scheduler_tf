@@ -37,7 +37,7 @@ from one_cycle_tf import OneCycle
 # 5. final_lr_scale - the scale of value to decay
 # (in case if you want to decay more than initial value or less) 
 # filal_lr = initial_learning_rate * final_lr_scale
-cycle_size = epoch * numper_iterations_per_epoch
+cycle_size = epoch * number_iterations_per_epoch
 numper_iterations_per_epoch = datasets_size/batch_size
 lr_scheduler = OneCycle(initial_learning_rate=0.03/25.0,
                         maximal_learning_rate=0.03,
