@@ -29,11 +29,11 @@ class OneCycle(tf.keras.optimizers.schedules.LearningRateSchedule):
         self,
         initial_learning_rate,
         maximal_learning_rate,
-        step_size,
+        cycle_size,
         scale_fn=lambda x: 1.0,
         shift_peak=0.3,
         scale_mode="cycle",
-        final_lr_scale=1e-4,
+        final_lr_scale=1.0,
         name=None,
     ):
         """
@@ -45,11 +45,11 @@ class OneCycle(tf.keras.optimizers.schedules.LearningRateSchedule):
         ```python
          maximal_learning_rate = <value from lr finder>
         initial_learning_rate = maximal_learning_rate / 25.0
-        step_size = 3-5 epoch (should be defined by you) It defines half size of cycle
+        cycle_size = 3-5 epoch (should be defined by you) It defines size of cycle
         lr_schedule = CyclicalCosineAnnealing(
             initial_learning_rate,
             maximal_learning_rate,
-            step_size,
+            cycle_size,
             scale_fn = lambda x: 1.0, or lambda x: tf.where(x > 1.0, 0.8, 1.0)
             shift_peak = 0.3
             scale_mode="cycle",
@@ -69,8 +69,7 @@ class OneCycle(tf.keras.optimizers.schedules.LearningRateSchedule):
         shift_peak: shift the pick point to the left side
         scale_mode: scale by "cycle" or "step"
         final_lr_scale: filal_lr = initial_learning_rate * final_lr_scale
-        name: String.  Optional name of the operation.  Defaults to
-            'CyclicalCosineAnnealing'.
+        name: String.  Optional name of the operation.
         Returns:
         A 1-arg callable learning rate schedule that takes the current optimizer
         step and outputs the cyclical learning rate, a scalar `Tensor` of the same
@@ -79,14 +78,14 @@ class OneCycle(tf.keras.optimizers.schedules.LearningRateSchedule):
         super(OneCycle, self).__init__()
         self.initial_learning_rate = initial_learning_rate
         self.maximal_learning_rate = maximal_learning_rate
-        self.step_size = step_size
+        self.cycle_size = cycle_size
         self.scale_fn = scale_fn
         self.scale_mode = scale_mode
         self.shift_peak = shift_peak
         self.final_lr_scale = final_lr_scale
         self.name = name
         # Defines the position of the max lr in steps
-        self._total_steps = step_size * 2
+        self._total_steps = cycle_size
         self._first_half_steps = shift_peak * self._total_steps
         self._second_half_steps = self._total_steps - self._first_half_steps
 
@@ -144,7 +143,7 @@ class OneCycle(tf.keras.optimizers.schedules.LearningRateSchedule):
         return {
             "initial_learning_rate": self.initial_learning_rate,
             "maximal_learning_rate": self.maximal_learning_rate,
-            "step_size": self.step_size,
+            "cycle_size": self.cycle_size,
             "scale_mode": self.scale_mode,
             "shift_peak": self.shift_peak,
         }
@@ -155,7 +154,7 @@ if __name__ == "__main__":
 
     initial_learning_rate = 0.0
     maximal_learning_rate = 1.0
-    step_size = 10
+    cycle_size = 20
     shift_peak = 0.2
 
     scale_mode = "cycle"
@@ -163,7 +162,7 @@ if __name__ == "__main__":
     lr_schedule = OneCycle(
         initial_learning_rate=initial_learning_rate,
         maximal_learning_rate=maximal_learning_rate,
-        step_size=step_size,
+        cycle_size=cycle_size,
         scale_mode=scale_mode,
         shift_peak=shift_peak,
         name=name,
@@ -172,7 +171,7 @@ if __name__ == "__main__":
     lr = lr_schedule(step)
     plt.figure(figsize=(8, 6))
     plt.plot(step / 20, lr)
-    plt.ylim([0, max(plt.ylim())])
+    plt.ylim([0.0, max(plt.ylim())])
     plt.xlabel("Epoch")
-    _ = plt.ylabel("Learning Rate")
+    _ = plt.ylabel("Learning rate")
     plt.show()
