@@ -1,4 +1,5 @@
 # One cycle scheduler for tensorflow 2
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Dtananaev/one_cycle_scheduler_tf/blob/main/LICENSE.txt) 
 
 This is a repository for one cycle policy for tensorflow 2.0.
 
@@ -42,7 +43,7 @@ lr_scheduler = OneCycle(initial_learning_rate=0.03/25.0,
                         shift_peak=0.3,
                         final_lr_scale=1.0
                         )
-# The example of adamw optimizer (adam with decopled weight decay)
+# The example of adamw optimizer (adam with decoupled weight decay)
 # for tensorflow2.0 (you need to pre install tensorflow_addons)
 weight_decay=1e-4
 optimizer = tfa.optimizers.AdamW(learning_rate=lr_scheduler, weight_decay=weight_decay)
