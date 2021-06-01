@@ -10,6 +10,7 @@ The idea is to train neural network withing one cycle where withing first part o
   <img src="https://github.com/Dtananaev/one_cycle_scheduler_tf/blob/main/images/one_cycle_momentum.png" width="240"/>
    <img src="https://github.com/Dtananaev/one_cycle_scheduler_tf/blob/main/images/one_cycle_wd.png" width="240"/>
 </p>
+
 # Installation
 
 in order to install just use:
