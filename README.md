@@ -30,16 +30,18 @@ import tensorflow_addons as tfa
 from one_cycle_tf import OneCycle
 # 1. Set as maximal_learning_rate the values from lr_finder
 # 2. Set as initial_learing_rate = maximal_learning_rate / 25.0 (best practice from fast AI)
-# 3. The size of cycle in epoch (The one cycle will be withing 10 epoch in example below)
+# 3. The size of cycle in iterations (The one cycle will be withing 10 epoch in example below)
 # 4. The shift peak affects the ratio between growing and decaying part of learning rate
 # (in the example below shift_peak=0.3, which means the learning rate will grow to 
 # maximal_learning_rate withing shift_peak * cycle_size = 0.3 * 10 = 3 epoch)
 # 5. final_lr_scale - the scale of value to decay
 # (in case if you want to decay more than initial value or less) 
 # filal_lr = initial_learning_rate * final_lr_scale
+cycle_size = epoch * numper_iterations_per_epoch
+numper_iterations_per_epoch = datasets_size/batch_size
 lr_scheduler = OneCycle(initial_learning_rate=0.03/25.0,
                         maximal_learning_rate=0.03,
-                        cycle_size=10, 
+                        cycle_size=cycle_size, 
                         shift_peak=0.3,
                         final_lr_scale=1.0
                         )
@@ -55,7 +57,7 @@ max_momentum = 0.95
 min_momentum = 0.85
 momentum_scheduler = OneCycle(initial_learning_rate=max_momentum,
                               maximal_learning_rate=min_momentum,
-                              cycle_size=10,
+                              cycle_size=cycle_size,
                               shift_peak=0.3,
                               final_lr_scale=1.0
                              )
@@ -69,7 +71,7 @@ max_wd = 1e-4
 min_wd = 0.0
 wd_scheduler = OneCycle(initial_learning_rate=max_wd,
                         maximal_learning_rate=min_wd,
-                        cycle_size=10, 
+                        cycle_size=cycle_size, 
                         shift_peak=0.3,
                         final_lr_scale=1.0
                        )
