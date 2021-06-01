@@ -44,7 +44,8 @@ lr_scheduler = OneCycle(initial_learning_rate=0.03/25.0,
                         )
 # The example of adamw optimizer (adam with decopled weight decay)
 # for tensorflow2.0 (you need to pre install tensorflow_addons)
-optimizer = tfa.optimizers.AdamW(learning_rate=lr_scheduler)
+weight_decay=1e-4
+optimizer = tfa.optimizers.AdamW(learning_rate=lr_scheduler, weight_decay=weight_decay)
 ```
 3. If you want to decay momentum of the optimizer (in case of adamw this is beta_1 parameter): 
 ```python

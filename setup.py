@@ -24,13 +24,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="one_cycle_tf", 
-    version="0.0.1",
+    version="0.0.3",
     author="Denis Tananaev",
     author_email="d.d.tananaev@gmail.com",
     description="Tensorflow implementation of one cycle policy.",
-    long_description="Tensorflow implementation of one cycle policy.",
+    long_description="Tensorflow implementation of one cycle policy. For more details see: https://github.com/Dtananaev/one_cycle_scheduler_tf",
     long_description_content_type="text/markdown",
-    url="",
+    url="https://github.com/Dtananaev/one_cycle_scheduler_tf",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
