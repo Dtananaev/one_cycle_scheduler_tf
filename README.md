@@ -6,9 +6,9 @@ The one cycle policy is a learning rate scheduler which allows to train neural n
 
 The idea is to train neural network withing one cycle where withing first part of cycle the learning rate grows from small value to high value and then gradually reduces for the small value again. The training with high values learning rate have effect of high regularization, thus in order to compensate this effect it is necessary to decay weight decay at this moment as well as reduce momentum of the optimizer, while when the learning rate decreasing it is necessary to increase weight decay and momentum. The example for the one cycle policy for the one epoch for the learning rate (min=0.0, max=1.0), momentum (min=0.85, max=0.95) and weight_decay (min=0.0, max=1e-4) on the images below.
 <p align="center">
- <img src="https://github.com/Dtananaev/one_cycle_scheduler_tf/blob/main/images/one_cycle.png" width="120"/>
-  <img src="https://github.com/Dtananaev/one_cycle_scheduler_tf/blob/main/images/one_cycle_momentum.png" width="120"/>
-   <img src="https://github.com/Dtananaev/one_cycle_scheduler_tf/blob/main/images/one_cycle_wd.png" width="120"/>
+ <img src="https://github.com/Dtananaev/one_cycle_scheduler_tf/blob/main/images/one_cycle.png" width="240"/>
+  <img src="https://github.com/Dtananaev/one_cycle_scheduler_tf/blob/main/images/one_cycle_momentum.png" width="240"/>
+   <img src="https://github.com/Dtananaev/one_cycle_scheduler_tf/blob/main/images/one_cycle_wd.png" width="240"/>
 </p>
 # Installation
 
