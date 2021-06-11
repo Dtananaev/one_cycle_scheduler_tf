@@ -38,7 +38,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-          'tensorflow>=2.0.0',
           'numpy',
           'matplotlib',
       ],
